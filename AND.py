@@ -29,7 +29,7 @@ sockets_list = [server_socket]
 # List of connected clients - socket as a key, user header and name as data
 clients = {}
 
-#print("Listening for connections on IP %s and %s PORT" % (IP, PORT))
+print(f'Listening for connections on {IP}:{PORT}...')
 
 # Handles message receiving
 def receive_message(client_socket):
@@ -95,7 +95,7 @@ while True:
             # Also save username and username header
             clients[client_socket] = user
 
-            #print('Accepted new connection from {}:{}, username: {}'.format(*client_address, user['data'].decode('utf-8')))
+            print('Accepted new connection from {}:{}, username: {}'.format(*client_address, user['data'].decode('utf-8')))
 
         # Else existing socket is sending a message
         else:
@@ -105,7 +105,7 @@ while True:
 
             # If False, client disconnected, cleanup
             if message is False:
-                #print('Closed connection from: {}'.format(clients[notified_socket]['data'].decode('utf-8')))
+                print('Closed connection from: {}'.format(clients[notified_socket]['data'].decode('utf-8')))
 
                 # Remove from list for socket.socket()
                 sockets_list.remove(notified_socket)
@@ -117,8 +117,9 @@ while True:
 
             # Get user by notified socket, so we will know who sent the message
             user = clients[notified_socket]
-            #print(f'Received message from {user["data"].decode("utf-8")}: {message["data"].decode("utf-8")}')
-            print(f'{message["data"].decode("utf-8")}')
+
+            print(f'Received message from {user["data"].decode("utf-8")}: {message["data"].decode("utf-8")}')
+
             # Iterate over connected clients and broadcast message
             for client_socket in clients:
 
