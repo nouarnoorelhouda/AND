@@ -1,18 +1,13 @@
-import random
 import socket
 import select
 import errno
-import string
 import sys
-
-from pip._vendor.msgpack.fallback import xrange
 
 HEADER_LENGTH = 10
 
 IP = "127.0.0.1"
 PORT = 1234
-my_username = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(32)])
-#print(my_username)
+my_username = "receiver"
 
 # Create a socket
 # socket.AF_INET - address family, IPv4, some otehr possible are AF_INET6, AF_BLUETOOTH, AF_UNIX
@@ -34,15 +29,15 @@ client_socket.send(username_header + username)
 while True:
 
     # Wait for user to input a message
-    #message = input('{my_username} > ')
+    #message = input(f'{my_username} > ')
 
     # If message is not empty - send it
     #if message:
 
-     #   # Encode message to bytes, prepare header and convert to bytes, like for username above, then send
-     #   message = message.encode('utf-8')
-     #   message_header = f"{len(message):<{HEADER_LENGTH}}".encode('utf-8')
-     #   client_socket.send(message_header + message)
+        # Encode message to bytes, prepare header and convert to bytes, like for username above, then send
+        #message = message.encode('utf-8')
+        #message_header = f"{len(message):<{HEADER_LENGTH}}".encode('utf-8')
+        #client_socket.send(message_header + message)
 
     try:
         # Now we want to loop over received messages (there might be more than one) and print them
